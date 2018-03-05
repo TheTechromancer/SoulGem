@@ -1,2 +1,2 @@
 # soulgem.py
-An mystical-looking "soul gem" LED pattern for WS281x LED strips.  Tested with Raspberry Pi 3.
+A mystical-looking "soul gem" LED pattern for WS281x LED strips.  Tested with Raspberry Pi 3.
