@@ -18,7 +18,7 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 class SoulGem():
 
-    def __init__(self, color=(90,0,200), color_cycle=False, num_souls=1, base_color=(5,0,10), offset=10):
+    def __init__(self, color=(100,0,200), color_cycle=False, num_souls=1, base_color=(5,0,10), offset=10):
 
         # Create NeoPixel object with appropriate configuration.
         self.strip          = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
@@ -50,8 +50,8 @@ class SoulGem():
 
         while not self._stop:
             for j in range(128):
-                for i in range(self.strip.numPixels())[self.offset:]:
-                    self.strip.setPixelColor(i, self.wheel((i+j) & 127))
+                for i in self.usable:
+                    self.strip.setPixelColor(i, self.wheel(((i-self.offset)+j) & 127))
                 self.strip.show()
                 sleep(.1)
 
@@ -75,13 +75,13 @@ class SoulGem():
                     soul.float()
 
 
-    def wheel(self, pos, variation=10):
+    def wheel(self, pos, variation=8):
 
         half = int(variation / 2)
         divisor = 64 / variation
 
-        base_red = self.bright_color[0] / 3
-        base_blue = self.bright_color[2] / 3
+        base_red = self.bright_color[0] / 4
+        base_blue = self.bright_color[2] / 4
 
         if pos < 64:
 
